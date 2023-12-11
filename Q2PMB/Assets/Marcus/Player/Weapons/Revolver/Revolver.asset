@@ -23,4 +23,5 @@ MonoBehaviour:
   aimRecoilY: 0
   aimRecoilZ: 0
   spreadFactor: 0
+  raycastLength: 0.26
   bullet: {fileID: 0}

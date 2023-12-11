@@ -22,5 +22,6 @@ public class Gun : ScriptableObject
 
     public float spreadFactor;
 
+    public float raycastLength;
     public GameObject bullet;
 }
