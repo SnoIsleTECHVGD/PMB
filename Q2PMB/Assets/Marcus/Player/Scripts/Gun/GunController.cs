@@ -26,6 +26,10 @@ public class GunController : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        
+    }
 
     private void CollisionDetection(GunObject weapon)
     {
@@ -35,7 +39,8 @@ public class GunController : MonoBehaviour
         {
             Vector3 localHit = collision.InverseTransformPoint(hit.point);
 
-            collision.localPosition = Vector3.Lerp(collision.localPosition, new Vector3(0, localHit.y, 0), Time.deltaTime * 8);
+
+            collision.localPosition = Vector3.Lerp(collision.localPosition, new Vector3(0, Mathf.Round(localHit.y * 100.0f) * 0.01f, 0), Time.deltaTime * 8);
         }
         else
         {

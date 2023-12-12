@@ -117,6 +117,7 @@ public class InventoryManager : MonoBehaviour
         weapon.transform.GetComponent<Collider>().enabled = true;
         weapon.transform.gameObject.AddComponent<Rigidbody>();
         weapon.transform.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
         weapon.transform.GetComponent<Rigidbody>().AddExplosionForce(25, transform.position, 10);
         currentWeapon = null;
     }
