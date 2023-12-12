@@ -10,14 +10,14 @@ public class GunController : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        if(inventory.currentWeapon)
+        if (inventory.currentWeapon)
         {
-            if(inventory.currentWeapon.GetComponent<GunObject>())
+            if (inventory.currentWeapon.GetComponent<GunObject>())
             {
                 GunObject gun = inventory.currentWeapon.GetComponent<GunObject>();
                 CollisionDetection(gun);
@@ -31,9 +31,11 @@ public class GunController : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(weapon.RaycastPoint.position, Camera.main.transform.forward, out hit, weapon.gunInfo.raycastLength, ~inventory.ignore))
+        if (Physics.Raycast(weapon.RaycastPoint.position, Camera.main.transform.forward, out hit, weapon.gunInfo.raycastLength, ~inventory.ignore))
         {
-            collision.localPosition = Vector3.Lerp(collision.localPosition, new Vector3(0, -hit.distance, 0), Time.deltaTime * 8);
+            Vector3 localHit = collision.InverseTransformPoint(hit.point);
+
+            collision.localPosition = Vector3.Lerp(collision.localPosition, new Vector3(0, localHit.y, 0), Time.deltaTime * 8);
         }
         else
         {
