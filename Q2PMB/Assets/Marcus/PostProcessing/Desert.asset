@@ -1016,7 +1016,7 @@ MonoBehaviour:
     m_Value: 255
   reflectionLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 5
     min: 0
   reflectionLightingLayers:
     m_OverrideState: 0

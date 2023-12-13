@@ -8,6 +8,7 @@ public class InventoryManager : MonoBehaviour
     public WeaponObject currentWeapon;
     public Transform weaponHolder;
 
+    public RigBuilder rig;
     public TwoBoneIKConstraint LArm;
     public TwoBoneIKConstraint RArm;
 
@@ -15,7 +16,7 @@ public class InventoryManager : MonoBehaviour
 
     void Start()
     {
-        if(currentWeapon)
+        if (currentWeapon)
         {
             EquipWeapon(currentWeapon);
         }
@@ -23,7 +24,7 @@ public class InventoryManager : MonoBehaviour
 
     void Update()
     {
-        if(currentWeapon)
+        if (currentWeapon)
         {
             DropHandler();
         }
@@ -33,7 +34,7 @@ public class InventoryManager : MonoBehaviour
 
     void DropHandler()
     {
-        if(Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             DropWeapon(currentWeapon);
         }
@@ -41,13 +42,13 @@ public class InventoryManager : MonoBehaviour
 
     void PickupHandler()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             RaycastHit hit;
-            if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 5, ~ignore))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 5, ~ignore))
             {
                 print(hit.transform.name);
-                if(hit.transform.GetComponent<WeaponObject>())
+                if (hit.transform.GetComponent<WeaponObject>())
                 {
                     EquipWeapon(hit.transform.GetComponent<WeaponObject>());
                 }
@@ -66,7 +67,7 @@ public class InventoryManager : MonoBehaviour
         {
             RArm.data.target = weapon.RHand;
             RArm.weight = 1;
-            if(weapon.RHint)
+            if (weapon.RHint)
             {
                 RArm.data.hint = weapon.RHint;
             }
@@ -81,6 +82,9 @@ public class InventoryManager : MonoBehaviour
                 LArm.data.hint = weapon.LHint;
             }
         }
+
+        rig.Build();
+
         weapon.anim.enabled = true;
 
         weapon.anim.CrossFade("Equip", .1f);
@@ -110,6 +114,7 @@ public class InventoryManager : MonoBehaviour
                 LArm.data.hint = null;
             }
         }
+
         weapon.anim.enabled = false;
 
         weapon.transform.parent = null;
