@@ -873,6 +873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39851850053634152}
   - component: {fileID: 39851850053634151}
+  - component: {fileID: 2222069045118038890}
   m_Layer: 3
   m_Name: Sway
   m_TagString: Untagged
@@ -907,6 +908,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48948dfe9d76b07488dacd46a7955fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2222069045118038890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39851850053634153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3ef8166c542cb439c3ecf8fa453ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swayStep: 0.01
+  swayMaxStepDistance: 0.03
+  rotationStep: 4
+  maxRotationStep: 5
+  smooth: 10
+  rotationSmooth: 12
 --- !u!1 &695335639549647814
 GameObject:
   m_ObjectHideFlags: 0
