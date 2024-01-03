@@ -20,7 +20,7 @@ public class Grenade : MonoBehaviour
     private bool exploded = false;
     private void Update()
     {
-        if (!detonateOnCollision )
+        if (!detonateOnCollision)
         {
 
             timer += Time.deltaTime;
@@ -38,11 +38,11 @@ public class Grenade : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (detonateOnCollision )
+        if (detonateOnCollision)
         {
             Detonate();
             exploded = true;
-
+                
         }
     }
 
@@ -53,11 +53,13 @@ public class Grenade : MonoBehaviour
 
         Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, explosionRadius);
 
-        foreach(Collider coll in nearbyObjects)
+        foreach (Collider coll in nearbyObjects)
         {
-            if(coll.GetComponent<Rigidbody>())
+            if (coll.GetComponent<Rigidbody>())
             {
+
                 coll.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius);
+
             }
         }
         Destroy(Instantiate(explosion, transform.position, Quaternion.identity).gameObject, particleLifetime);

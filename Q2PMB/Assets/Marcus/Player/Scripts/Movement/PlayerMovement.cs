@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     public bool justJumped = false;
 
+    public Animator jumpAnim;
+
     [SerializeField] private LayerMask player;
     [SerializeField] private float walkSpeed = 2.4f;
     [SerializeField] private float runSpeed = 4;
@@ -65,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpCooldown = 0;
                 ySpeed += Mathf.Sqrt(1.2f * 1.3f * 9.81f);
                 //just jumped
+                jumpAnim.SetBool("justJumped", true);
                 justJumped = true;
             }
         }
@@ -76,7 +79,8 @@ public class PlayerMovement : MonoBehaviour
 
                 var ray = new Ray(Camera.main.transform.position, Vector3.down);
 
-              
+
+                jumpAnim.SetBool("justJumped", false);
 
                 //just landed 
                 justJumped = false;
