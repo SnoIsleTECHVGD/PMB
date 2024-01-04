@@ -156,12 +156,12 @@ MonoBehaviour:
   anim: {fileID: 2796788478526203125}
   LHand: {fileID: 579581485746611182}
   LFingers: {fileID: 0}
-  explosion: {fileID: 6578741886828330759, guid: 0a5f8939c7847694e9913ecbba522dac, type: 3}
+  explosion: {fileID: 4091217751966215584, guid: 330d4d0c259e8a64a98de4fa1092a835, type: 3}
   timeBeforeDetonate: 2
   explosionForce: 600
   explosionRadius: 20
   particleLifetime: 3
-  detonateOnCollision: 0
+  detonateOnCollision: 1
 --- !u!95 &2796788478526203125
 Animator:
   serializedVersion: 3

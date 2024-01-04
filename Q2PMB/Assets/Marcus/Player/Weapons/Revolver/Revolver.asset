@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: Revolver
   m_EditorClassIdentifier: 
   isAutomatic: 0
-  fireRate: 0.3
-  recoilSnappiness: 0
-  recoilReturnTime: 0
-  recoilX: 0
-  recoilY: 0
+  fireRate: 0.2
+  recoilSnappiness: 19
+  recoilReturnTime: 12
+  recoilX: -6
+  recoilY: 2
   recoilZ: 0
   aimRecoilX: 0
   aimRecoilY: 0
   aimRecoilZ: 0
+  returnSpeed: 5
+  snappiness: 6
   spreadFactor: 0
   raycastLength: 0.26
-  bullet: {fileID: 0}
+  bullet: {fileID: 309191907142390486, guid: 36ed7db391630c04282c2ef2d5ef842b, type: 3}

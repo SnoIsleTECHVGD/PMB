@@ -8,8 +8,12 @@ public class GunController : MonoBehaviour
 
     public Transform collision;
 
+    public Transform cameraHolder;
+
+    public Recoil recoil;
     public Grenade Grenade;
 
+    private float shootTimer = 0;
     void Start()
     {
 
@@ -19,11 +23,13 @@ public class GunController : MonoBehaviour
     {
         if (inventory.currentWeapon)
         {
+            shootTimer += Time.deltaTime;
+
             if (inventory.currentWeapon.GetComponent<GunObject>())
             {
                 GunObject gun = inventory.currentWeapon.GetComponent<GunObject>();
                 CollisionDetection(gun);
-
+                HandleFiring(gun);
             }
 
             GrenadeController();
@@ -35,6 +41,57 @@ public class GunController : MonoBehaviour
         
     }
 
+
+    private void HandleFiring(GunObject gun)
+    {
+        if(gun.gunInfo.isAutomatic)
+        {
+            if (Input.GetMouseButton(0) && shootTimer > gun.gunInfo.fireRate)
+            {
+                shootRecoil(gun);
+                shootTimer = 0;
+
+                Transform bullet = Instantiate(gun.gunInfo.bullet.transform);
+                bullet.position = gun.Barrel.position;
+                bullet.forward = Camera.main.transform.forward;
+                bullet.GetComponent<Rigidbody>().AddForce(bullet.forward * 500, ForceMode.Impulse);
+                Destroy(bullet.gameObject, 2);
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0) && shootTimer > gun.gunInfo.fireRate)
+            {   
+                shootRecoil(gun);
+                shootTimer = 0;
+
+                Transform bullet = Instantiate(gun.gunInfo.bullet.transform);
+                bullet.position = gun.Barrel.position;
+                bullet.forward = Camera.main.transform.forward;
+                bullet.GetComponent<Rigidbody>().AddForce(bullet.forward * 500, ForceMode.Impulse);
+                Destroy(bullet.gameObject, 2);
+            }
+
+        }
+    }
+
+
+    private void shootRecoil(GunObject gun)
+    {
+        recoil.recoilX = gun.gunInfo.recoilX;
+        recoil.recoilY = gun.gunInfo.recoilY;
+        recoil.recoilZ = gun.gunInfo.recoilZ;
+
+        recoil.aimRecoilX = gun.gunInfo.aimRecoilX;
+        recoil.aimRecoilY = gun.gunInfo.aimRecoilY;
+        recoil.aimRecoilZ = gun.gunInfo.aimRecoilZ;
+
+        recoil.snappiness = gun.gunInfo.snappiness;
+        recoil.returnSpeed = gun.gunInfo.returnSpeed;
+
+        recoil.Fire();
+
+    }
     private void CollisionDetection(GunObject weapon)
     {
         RaycastHit hit;
@@ -63,8 +120,6 @@ public class GunController : MonoBehaviour
             inventory.LArm.data.target = gren.LHand;
             gren.anim.CrossFade("Throw", .1f);
 
-
-
             inventory.rig.Build();
             StartCoroutine(ThrowGrenade(gren));
 
@@ -82,8 +137,6 @@ public class GunController : MonoBehaviour
 
             }
         }
-
-
     }
     IEnumerator ThrowGrenade(Grenade gren)
     {
@@ -92,8 +145,6 @@ public class GunController : MonoBehaviour
 
         yield return new WaitForSeconds(.283f);
         gren.anim.enabled = false;
-
-
 
         gren.transform.parent = null;
         gren.gameObject.AddComponent<Rigidbody>();
@@ -107,7 +158,5 @@ public class GunController : MonoBehaviour
         inventory.rig.Build();
 
         StartCoroutine(weightWait(.5f, 1));
-
-
     }
 }

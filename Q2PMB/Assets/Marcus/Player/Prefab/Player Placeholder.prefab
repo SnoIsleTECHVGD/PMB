@@ -142,6 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39851848694204645}
   - component: {fileID: 39851848694204644}
+  - component: {fileID: 1773909519026560119}
   m_Layer: 3
   m_Name: Recoil
   m_TagString: Untagged
@@ -176,6 +177,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48948dfe9d76b07488dacd46a7955fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1773909519026560119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39851848694204646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20dc907a4ffeb2048bb43ff148df3077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAiming: 0
+  recoilX: 0
+  recoilY: 0
+  recoilZ: 0
+  aimRecoilX: 0
+  aimRecoilY: 0
+  aimRecoilZ: 0
+  returnSpeed: 0
+  snappiness: 0
 --- !u!1 &39851848872969338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1898,7 @@ Transform:
   - {fileID: 39851849451001410}
   - {fileID: 39851849605403868}
   - {fileID: 39851848872969337}
+  - {fileID: 6514871669210434793}
   m_Father: {fileID: 39851849865342202}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 187.3, z: 90}
@@ -1943,7 +1966,7 @@ MonoBehaviour:
   LHint: {fileID: 0}
   RaycastPoint: {fileID: 39851848872969337}
   gunInfo: {fileID: 11400000, guid: be63da45b2bcf0d448c731d5b257fbfd, type: 2}
-  Barrel: {fileID: 0}
+  Barrel: {fileID: 6514871669210434793}
 --- !u!1 &4300630317701781967
 GameObject:
   m_ObjectHideFlags: 0
@@ -2602,6 +2625,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 5454273851505514344}
   collision: {fileID: 39851849865342202}
+  cameraHolder: {fileID: 39851849641998374}
+  recoil: {fileID: 1773909519026560119}
   Grenade: {fileID: 3357251449441263918, guid: 3a242aaad25ee4f44b18b52cc173fc17, type: 3}
 --- !u!1 &5736004196187570859
 GameObject:
@@ -3076,6 +3101,36 @@ Transform:
   - {fileID: 5105745479418067840}
   m_Father: {fileID: 8957557093538546139}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7409154992044577094
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6514871669210434793}
+  m_Layer: 0
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6514871669210434793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7409154992044577094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.8, y: -0, z: -136.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3483089841688131669}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7434901526769030016
 GameObject:

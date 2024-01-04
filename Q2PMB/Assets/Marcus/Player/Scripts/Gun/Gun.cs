@@ -20,6 +20,9 @@ public class Gun : ScriptableObject
     public float aimRecoilY;
     public float aimRecoilZ;
 
+    public float returnSpeed;
+    public float snappiness;
+
     public float spreadFactor;
 
     public float raycastLength;

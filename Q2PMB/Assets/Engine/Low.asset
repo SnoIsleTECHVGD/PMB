@@ -200,14 +200,14 @@ MonoBehaviour:
     supportShadowMask: 1
     supportSSR: 0
     supportSSRTransparent: 0
-    supportSSAO: 1
+    supportSSAO: 0
     supportSSGI: 0
-    supportSubsurfaceScattering: 1
+    supportSubsurfaceScattering: 0
     sssSampleBudget:
       m_Values: 140000002800000050000000
       m_SchemaId:
         m_Id: With3Levels
-    supportVolumetrics: 1
+    supportVolumetrics: 0
     supportLightLayers: 0
     lightLayerName0: Light Layer default
     lightLayerName1: Light Layer 1
@@ -217,7 +217,7 @@ MonoBehaviour:
     lightLayerName5: Light Layer 5
     lightLayerName6: Light Layer 6
     lightLayerName7: Light Layer 7
-    supportDistortion: 1
+    supportDistortion: 0
     supportTransparentBackface: 1
     supportTransparentDepthPrepass: 1
     supportTransparentDepthPostpass: 1
@@ -226,10 +226,10 @@ MonoBehaviour:
     customBufferFormat: 12
     supportedLitShaderMode: 2
     planarReflectionResolution:
-      m_Values: 000100000004000000080000
+      m_Values: 000100000004000000040000
       m_SchemaId:
         m_Id: With3Levels
-    supportDecals: 1
+    supportDecals: 0
     supportDecalLayers: 0
     decalLayerName0: Decal Layer default
     decalLayerName1: Decal Layer 1
@@ -276,7 +276,7 @@ MonoBehaviour:
     hdShadowInitParams:
       maxShadowRequests: 128
       directionalShadowsDepthBits: 32
-      shadowFilteringQuality: 1
+      shadowFilteringQuality: 0
       punctualLightShadowAtlas:
         shadowAtlasResolution: 4096
         shadowAtlasDepthBits: 32
@@ -299,7 +299,7 @@ MonoBehaviour:
         m_Values: 00010000000200000004000000080000
         m_SchemaId:
           m_Id: With4Levels
-      maxDirectionalShadowMapResolution: 2048
+      maxDirectionalShadowMapResolution: 256
       maxPunctualShadowMapResolution: 2048
       maxAreaShadowMapResolution: 2048
       supportScreenSpaceShadows: 0
@@ -315,13 +315,13 @@ MonoBehaviour:
       lutFormat: 48
       bufferFormat: 74
     dynamicResolutionSettings:
-      enabled: 0
-      maxPercentage: 100
-      minPercentage: 100
+      enabled: 1
+      maxPercentage: 90
+      minPercentage: 60
       dynResType: 1
       upsampleFilter: 1
-      forceResolution: 0
-      forcedPercentage: 100
+      forceResolution: 1
+      forcedPercentage: 75
     lowresTransparentSettings:
       enabled: 1
       checkerboardDepthBuffer: 1
@@ -437,7 +437,7 @@ MonoBehaviour:
   enableSRPBatcher: 1
   shaderVariantLogLevel: 0
   availableMaterialQualityLevels: -1
-  m_DefaultMaterialQualityLevel: 4
+  m_DefaultMaterialQualityLevel: 1
   diffusionProfileSettings: {fileID: 0}
   diffusionProfileSettingsList: []
   beforeTransparentCustomPostProcesses: []

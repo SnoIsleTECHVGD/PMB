@@ -64,6 +64,6 @@ public class Grenade : MonoBehaviour
         }
         Destroy(Instantiate(explosion, transform.position, Quaternion.identity).gameObject, particleLifetime);
 
-        Destroy(this.gameObject, 1);
+        Destroy(this.gameObject, 2);
     }
 }
