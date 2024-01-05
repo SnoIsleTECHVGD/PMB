@@ -14,6 +14,8 @@ public class CameraMovement : MonoBehaviour
     public float sensitivity = 1f;
     public float smoothing = 1.3f;
 
+    public float minClamp, maxClamp;
+
     private Transform playerObj;
 
     void Start()
@@ -55,7 +57,7 @@ public class CameraMovement : MonoBehaviour
         this.appliedMouseDelta = Vector2.Lerp(this.appliedMouseDelta, b, 1f / this.smoothing);
         this.currentMouseLook += this.appliedMouseDelta;
         //Clamped values (90 &-90f is standard fps)
-        this.currentMouseLook.y = Mathf.Clamp(this.currentMouseLook.y, -90f, 90f);
+        this.currentMouseLook.y = Mathf.Clamp(this.currentMouseLook.y, minClamp, maxClamp);
 
         base.transform.localRotation = Quaternion.AngleAxis(-this.currentMouseLook.y, Vector3.right);
         playerObj.localRotation = Quaternion.AngleAxis(currentMouseLook.x, Vector3.up) * startPlayerRot;

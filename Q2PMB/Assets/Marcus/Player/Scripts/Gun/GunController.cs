@@ -117,10 +117,8 @@ public class GunController : MonoBehaviour
             Grenade gren = Instantiate(Grenade.transform, inventory.weaponHolder).GetComponent<Grenade>();
 
             StartCoroutine(weightWait(.3f, 0));
-            inventory.LArm.data.target = gren.LHand;
             gren.anim.CrossFade("Throw", .1f);
 
-            inventory.rig.Build();
             StartCoroutine(ThrowGrenade(gren));
 
         }
@@ -140,7 +138,9 @@ public class GunController : MonoBehaviour
     }
     IEnumerator ThrowGrenade(Grenade gren)
     {
-        yield return new WaitForSeconds(.183f);
+        yield return new WaitForSeconds(.283f);
+        inventory.LArm.data.target = gren.LHand;
+        inventory.rig.Build();
         StartCoroutine(weightWait(.2f, 1));
 
         yield return new WaitForSeconds(.283f);
