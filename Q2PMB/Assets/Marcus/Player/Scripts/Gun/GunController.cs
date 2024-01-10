@@ -13,6 +13,7 @@ public class GunController : MonoBehaviour
     public Recoil recoil;
     public Grenade Grenade;
 
+    private bool isAiming = false;
     private float shootTimer = 0;
     void Start()
     {
@@ -30,6 +31,7 @@ public class GunController : MonoBehaviour
                 GunObject gun = inventory.currentWeapon.GetComponent<GunObject>();
                 CollisionDetection(gun);
                 HandleFiring(gun);
+                HandleAnimation(gun);
             }
 
             GrenadeController();
@@ -38,13 +40,13 @@ public class GunController : MonoBehaviour
 
     private void LateUpdate()
     {
-        
+
     }
 
 
     private void HandleFiring(GunObject gun)
     {
-        if(gun.gunInfo.isAutomatic)
+        if (gun.gunInfo.isAutomatic)
         {
             if (Input.GetMouseButton(0) && shootTimer > gun.gunInfo.fireRate)
             {
@@ -61,7 +63,7 @@ public class GunController : MonoBehaviour
         else
         {
             if (Input.GetMouseButtonDown(0) && shootTimer > gun.gunInfo.fireRate)
-            {   
+            {
                 shootRecoil(gun);
                 shootTimer = 0;
 
@@ -75,9 +77,43 @@ public class GunController : MonoBehaviour
         }
     }
 
+    private void HandleAnimation(GunObject gun)
+    {
+        gun.anim.SetFloat("x", Input.GetAxisRaw("Horizontal"), .2f, Time.deltaTime);
+        gun.anim.SetFloat("y", Input.GetAxisRaw("Vertical"), .2f, Time.deltaTime);
+
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            gun.anim.SetFloat("speed", 2);
+
+        }
+        else
+        {
+            gun.anim.SetFloat("speed", 1);
+        }
+        if (Input.GetMouseButton(1))
+        {
+            isAiming = true;
+            gun.anim.SetBool("aiming", true);
+        }
+        else
+        {
+            isAiming = false;
+            gun.anim.SetBool("aiming", false);
+        }
+    }
 
     private void shootRecoil(GunObject gun)
     {
+        if(isAiming)
+        {
+            gun.anim.CrossFade("ShootAim", .05f);
+        }
+        else
+        {
+            gun.anim.CrossFade("Shoot", .05f);
+        }
+
         recoil.recoilX = gun.gunInfo.recoilX;
         recoil.recoilY = gun.gunInfo.recoilY;
         recoil.recoilZ = gun.gunInfo.recoilZ;
@@ -96,7 +132,7 @@ public class GunController : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(weapon.RaycastPoint.position, Camera.main.transform.forward, out hit, weapon.gunInfo.raycastLength, ~inventory.ignore))
+        if (Physics.Raycast(weapon.RaycastPoint.position, cameraHolder.forward, out hit, weapon.gunInfo.raycastLength, ~inventory.ignore))
         {
             Vector3 localHit = collision.InverseTransformPoint(hit.point);
 
@@ -112,7 +148,7 @@ public class GunController : MonoBehaviour
 
     void GrenadeController()
     {
-        if(Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             Grenade gren = Instantiate(Grenade.transform, inventory.weaponHolder).GetComponent<Grenade>();
 

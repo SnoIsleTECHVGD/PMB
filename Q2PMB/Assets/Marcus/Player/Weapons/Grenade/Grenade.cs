@@ -61,6 +61,11 @@ public class Grenade : MonoBehaviour
                 coll.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius);
 
             }
+
+            if(coll.GetComponent<Hitbox>())
+            {
+                coll.GetComponent<Hitbox>().Damage(125 / Vector3.Distance(transform.position, coll.transform.position), 125 / Vector3.Distance(transform.position, coll.transform.position), coll.transform.position);
+            }
         }
         Destroy(Instantiate(explosion, transform.position, Quaternion.identity).gameObject, particleLifetime);
 
