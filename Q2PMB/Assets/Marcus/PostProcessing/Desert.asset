@@ -309,7 +309,7 @@ MonoBehaviour:
     min: 0
   aerosolDensity:
     m_OverrideState: 1
-    m_Value: 0.102
+    m_Value: 0.057
     min: 0
     max: 1
   aerosolTint:
@@ -566,17 +566,17 @@ MonoBehaviour:
     m_Value: 0
   maximumHeight:
     m_OverrideState: 0
-    m_Value: 50
+    m_Value: 83.9
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 400
+    m_Value: 60.32
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
   albedo:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.9917453, b: 0.9669811, a: 1}
+    m_Value: {r: 0.8490566, g: 0.822023, b: 0.74092203, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1

@@ -2742,7 +2742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHealth: 1
-  MaxHealth: 100
+  MaxHealth: 50
   regenRate: 1
   StayStill: 0
   wanderRadius: 8
