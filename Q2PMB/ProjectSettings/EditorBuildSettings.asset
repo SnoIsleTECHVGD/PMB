@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Dylan/Start.unity
+    guid: e9f26c04e5856e643a7458e5e9612740
+  - enabled: 1
+    path: Assets/Dylan/Credits.unity
+    guid: e3cdaa5985772944a8e62a9b0f9411a5
+  - enabled: 1
     path: Assets/Dylan/DylanScene.unity
     guid: 08885ec495bf42d48b3afd442276955d
   m_configObjects: {}
