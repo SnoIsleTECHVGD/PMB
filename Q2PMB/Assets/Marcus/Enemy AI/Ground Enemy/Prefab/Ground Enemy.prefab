@@ -2746,7 +2746,7 @@ MonoBehaviour:
   regenRate: 1
   StayStill: 0
   wanderRadius: 8
-  walkSpeed: 1
+  walkSpeed: 1.5
   strafeSpeed: 1
   runSpeed: 1
   idleTimeMin: 3
@@ -2754,6 +2754,7 @@ MonoBehaviour:
   difficulty: 0
   currentState: 0
   hitParticle: {fileID: 8670459217519512860, guid: d9bc1d01a3215114cbd2007a7b57677c, type: 3}
+  ragdoll: {fileID: 6982429009277390312, guid: 3d1d16ae0d0a0164c8d22dce3ffc7422, type: 3}
 --- !u!1 &4556398449764958260
 GameObject:
   m_ObjectHideFlags: 0

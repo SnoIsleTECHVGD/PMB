@@ -27,6 +27,9 @@ public class GroundEnemy : HealthController
     private bool init = true;
     private NavMeshAgent agent;
     private Animator anim;
+
+    public Transform ragdoll;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -90,13 +93,16 @@ public class GroundEnemy : HealthController
     {
         if(CurrentHealth <= 0)
         {
+            var rag = Instantiate(ragdoll);
+            rag.position = transform.position;
+            rag.rotation = transform.rotation;
             Destroy(gameObject);
         }
     }
 
     public override void OnHit(Vector3 pos)
     {
-        var particle = Instantiate(hitParticle, transform);
+        var particle = Instantiate(hitParticle);
         particle.localScale = new Vector3(.23f, .23f, .23f);
         particle.position = pos;
 
