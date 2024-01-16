@@ -27,3 +27,4 @@ MonoBehaviour:
   spreadFactor: 0
   raycastLength: 0.26
   bullet: {fileID: 309191907142390486, guid: 36ed7db391630c04282c2ef2d5ef842b, type: 3}
+  muzzleFlash: {fileID: 3696350352318161034, guid: b8f429a8b9e050c42805cea4cfda5262, type: 3}

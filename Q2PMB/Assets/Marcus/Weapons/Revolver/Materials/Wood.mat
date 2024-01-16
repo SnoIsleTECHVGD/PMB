@@ -126,10 +126,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - MAIN_LIGHT_CALCULATE_SHADOWS: 0
     - Vector1_073fbaa733174de1b112e1c8b838bfe0: 0.7
     - Vector1_1d02044a84224c2b95c0c157253dc7e0: 0
     - Vector1_5afda7b2a001479bae13c93ac57e4885: 0
-    - Vector1_973be2afedaa48ebaa806884effd6da8: 1
+    - Vector1_973be2afedaa48ebaa806884effd6da8: 4.55
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1

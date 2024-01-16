@@ -160,7 +160,7 @@ MonoBehaviour:
   LHand: {fileID: 579581485746611182}
   LFingers: {fileID: 0}
   explosion: {fileID: 7621735902130516023, guid: 34b98ec64ba73d942be32402f71915b2, type: 3}
-  timeBeforeDetonate: 2
+  timeBeforeDetonate: 3
   explosionForce: 600
   explosionRadius: 10
   particleLifetime: 3

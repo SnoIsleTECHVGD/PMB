@@ -10,6 +10,7 @@ public class GunController : MonoBehaviour
 
     public Transform cameraHolder;
 
+    public Transform crosshair;
     public Recoil recoil;
     public Grenade Grenade;
 
@@ -51,7 +52,7 @@ public class GunController : MonoBehaviour
             if (Input.GetMouseButton(0) && shootTimer > gun.gunInfo.fireRate)
             {
                 shootRecoil(gun);
-                shootTimer = 0;
+                shootTimer = 0; 
 
                 Transform bullet = Instantiate(gun.gunInfo.bullet.transform);
                 bullet.position = gun.Barrel.position;
@@ -93,11 +94,13 @@ public class GunController : MonoBehaviour
         }
         if (Input.GetMouseButton(1))
         {
+            crosshair.gameObject.SetActive(false);
             isAiming = true;
             gun.anim.SetBool("aiming", true);
         }
         else
         {
+            crosshair.gameObject.SetActive(true);
             isAiming = false;
             gun.anim.SetBool("aiming", false);
         }
@@ -114,6 +117,8 @@ public class GunController : MonoBehaviour
             gun.anim.CrossFade("Shoot", .05f);
         }
 
+
+        Destroy(Instantiate(gun.gunInfo.muzzleFlash, gun.Barrel), .1f);
         recoil.recoilX = gun.gunInfo.recoilX;
         recoil.recoilY = gun.gunInfo.recoilY;
         recoil.recoilZ = gun.gunInfo.recoilZ;

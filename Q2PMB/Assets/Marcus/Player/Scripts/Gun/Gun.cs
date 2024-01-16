@@ -27,4 +27,5 @@ public class Gun : ScriptableObject
 
     public float raycastLength;
     public GameObject bullet;
+    public GameObject muzzleFlash;
 }

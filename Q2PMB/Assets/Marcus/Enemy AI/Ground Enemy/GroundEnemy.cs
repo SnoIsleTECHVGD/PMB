@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.VersionControl.Asset;
 
 public class GroundEnemy : HealthController
 {
@@ -27,9 +28,13 @@ public class GroundEnemy : HealthController
     private bool init = true;
     private NavMeshAgent agent;
     private Animator anim;
-
+    public Transform head;
     public Transform ragdoll;
+    public Vector3 lastPlayerPosition;
 
+    public MeshRenderer eyeRight;
+    public MeshRenderer eyeLeft;
+    public Material eyeDetected;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -49,6 +54,7 @@ public class GroundEnemy : HealthController
     {
         if (currentState == State.Idle)
         {
+            canSeePlayer(15);
             if (init)
             {
                 agent.isStopped = true;
@@ -149,6 +155,47 @@ public class GroundEnemy : HealthController
     public enum State
     {
         Idle, Wander, Combat, TakeCover
+    }
+
+    bool canSeePlayer(float range)
+    {
+        Collider[] localTransforms = Physics.OverlapSphere(transform.position, range);
+        PlayerMovement player = null;
+        Transform colliderHit = null;
+
+        foreach (Collider coll in localTransforms)
+        {
+            if (coll.transform.name == "AIDetection")
+            {
+                player = coll.transform.root.GetComponent<PlayerMovement>();
+                colliderHit = coll.transform; 
+            }
+        }
+
+        if (player)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(head.position, colliderHit.position - head.position, out hit, range))
+            {
+                if (hit.transform.name == "AIDetection")
+                {
+                    float angle = Vector3.Angle(colliderHit.position - transform.position, transform.forward);
+
+                    if (angle <= 65)
+                    {
+                        Material[] oldMats = eyeRight.materials;
+                        oldMats[0] = eyeDetected;
+
+                        eyeRight.materials = oldMats;
+                        eyeLeft.materials = oldMats;
+                        lastPlayerPosition = colliderHit.position;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
 
