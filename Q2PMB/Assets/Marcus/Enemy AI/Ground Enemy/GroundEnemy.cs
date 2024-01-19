@@ -10,6 +10,8 @@ public class GroundEnemy : HealthController
 
     public float wanderRadius;
 
+    float tracker;
+    public float playerCheckInterval;
     public float walkSpeed;
     public float strafeSpeed;
     public float runSpeed;
@@ -31,12 +33,16 @@ public class GroundEnemy : HealthController
     public Transform head;
     public Transform ragdoll;
     public Vector3 lastPlayerPosition;
+    public Transform player;
+
+    bool hasDetectedPlayer = false;
 
     public MeshRenderer eyeRight;
     public MeshRenderer eyeLeft;
     public Material eyeDetected;
     void Start()
     {
+        playerCheckInterval = Random.Range(15, 45);
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         Random.InitState(System.DateTime.Now.Millisecond);
@@ -52,9 +58,22 @@ public class GroundEnemy : HealthController
 
     void stateMachine()
     {
+        tracker++;
         if (currentState == State.Idle)
         {
-            canSeePlayer(15);
+            if(tracker == playerCheckInterval)
+            {
+                hasDetectedPlayer = canSeePlayer(15);
+                if (hasDetectedPlayer)
+                {
+                    globalTimer = 0;
+                    currentState = State.Combat;
+                    init = true;
+                    return;
+                }
+                tracker = 0;
+            }
+         
             if (init)
             {
                 agent.isStopped = true;
@@ -67,12 +86,23 @@ public class GroundEnemy : HealthController
                 globalTimer = 0;
                 currentState = State.Wander;
                 init = true;
-                return;
             }
         }
 
         if (currentState == State.Wander)
         {
+            if (tracker == playerCheckInterval)
+            {
+                hasDetectedPlayer = canSeePlayer(15);
+                if (hasDetectedPlayer)
+                {
+                    globalTimer = 0;
+                    currentState = State.Combat;
+                    init = true;
+                }
+                tracker = 0;
+            }
+
             if (init)
             {
                 agent.SetDestination(getWanderPosition(wanderRadius));
@@ -92,22 +122,66 @@ public class GroundEnemy : HealthController
             }
         }
 
+        if (currentState == State.Combat)
+        {
+            anim.SetBool("Combat", true);
+            if (tracker == playerCheckInterval)
+            {
+                hasDetectedPlayer = canSeePlayer(20);
+                if (hasDetectedPlayer)
+                {
+                    globalTimer = 0;
+                    currentState = State.Combat;
+                    init = true;
+                }
+                tracker = 0;
+            }
+            agent.updateRotation = false;
+            agent.isStopped = false;
 
+            if (init)
+            {
+                getCombatPosition();
+
+                init = false;
+            }
+
+
+            var lookPos = player.position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 4.5f);
+
+            if (pathComplete())
+            {
+                init = true;
+            }
+
+        }
     }
 
     public void deathCheck()
     {
-        if(CurrentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             var rag = Instantiate(ragdoll);
             rag.position = transform.position;
             rag.rotation = transform.rotation;
+            Destroy(rag.gameObject, 30);
             Destroy(gameObject);
         }
     }
 
     public override void OnHit(Vector3 pos)
     {
+        hasDetectedPlayer = canSeePlayerOnHit(40);
+        if (hasDetectedPlayer)
+        {
+            globalTimer = 0;
+            currentState = State.Combat;
+            init = true;
+        }
+
         var particle = Instantiate(hitParticle);
         particle.localScale = new Vector3(.23f, .23f, .23f);
         particle.position = pos;
@@ -115,8 +189,58 @@ public class GroundEnemy : HealthController
         Destroy(particle.gameObject, 2);
     }
 
+    public Vector3 getCombatPosition()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            if (Vector3.Distance(transform.position, player.position) > 10)
+            {
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(transform.position + transform.forward * Random.Range(5,15), out hit, 99999, NavMesh.AllAreas))
+                {
+                    anim.SetBool("StrafeR", false);
+                    anim.SetBool("StrafeL", false);
+                    anim.SetBool("Run", true);
+                    agent.speed = 2;
+                    agent.destination = hit.position;
+                }
+            }
+            else
+            {
+                bool random = Random.Range(0, 2) == 1;
+                if (random)
+                {
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(transform.position + transform.right * Random.Range(5, 15), out hit, 99999, NavMesh.AllAreas))
+                    {
+                        anim.SetBool("StrafeR", true);
+                        anim.SetBool("StrafeL", false);
+                        anim.SetBool("Run", false);
 
+                        anim.CrossFade("StrafeRAim", .1f);
+                        agent.speed = 1.2f;
+                        agent.destination = hit.position;
+                    }
+                }
+                else
+                {
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(transform.position + -transform.right * Random.Range(5, 15), out hit, 99999, NavMesh.AllAreas))
+                    {
+                        anim.SetBool("StrafeR", false);
+                        anim.SetBool("StrafeL", true);
+                        anim.SetBool("Run", false);
 
+                        agent.speed = 1.2f;
+
+                        agent.destination = hit.position;
+                    }
+                }
+            }
+        }
+
+        return transform.position;
+    }
     public Vector3 getWanderPosition(float distance)
     {
         for (int i = 0; i < 100; i++)
@@ -163,12 +287,54 @@ public class GroundEnemy : HealthController
         PlayerMovement player = null;
         Transform colliderHit = null;
 
+        List<GroundEnemy> localCompananions = new List<GroundEnemy>();
+
         foreach (Collider coll in localTransforms)
         {
             if (coll.transform.name == "AIDetection")
             {
                 player = coll.transform.root.GetComponent<PlayerMovement>();
-                colliderHit = coll.transform; 
+                colliderHit = coll.transform;
+            }
+
+            if(coll.transform.root.GetComponent<GroundEnemy>())
+            {
+                localCompananions.Add(coll.transform.root.GetComponent<GroundEnemy>());
+            }
+        }
+       
+        if (!hasDetectedPlayer)
+        {
+
+
+            foreach (GroundEnemy enemy in localCompananions)
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(head.position, enemy.head.position - head.position, out hit, range))
+                {
+                    if (hit.transform.GetComponent<Hitbox>())
+                    {
+                        float angle = Vector3.Angle(enemy.head.position - transform.position, transform.forward);
+
+                        if (angle <= 65)
+                        {
+                            if (enemy.hasDetectedPlayer)
+                            {
+                                Material[] oldMats = eyeRight.materials;
+                                oldMats[0] = eyeDetected;
+                                this.player = enemy.player;
+                                eyeRight.materials = oldMats;
+                                eyeLeft.materials = oldMats;
+                                lastPlayerPosition = enemy.lastPlayerPosition;
+                                globalTimer = 0;
+                                currentState = State.Combat;
+                                init = true;
+                                continue;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -183,16 +349,50 @@ public class GroundEnemy : HealthController
 
                     if (angle <= 65)
                     {
+                        this.player = player.transform;
+
                         Material[] oldMats = eyeRight.materials;
                         oldMats[0] = eyeDetected;
 
                         eyeRight.materials = oldMats;
                         eyeLeft.materials = oldMats;
                         lastPlayerPosition = colliderHit.position;
+                        hasDetectedPlayer = true;
                         return true;
                     }
                 }
             }
+        }
+
+        return false;
+    }
+
+    bool canSeePlayerOnHit(float range)
+    {
+        Collider[] localTransforms = Physics.OverlapSphere(transform.position, range);
+        PlayerMovement player = null;
+        Transform colliderHit = null;
+
+        foreach (Collider coll in localTransforms)
+        {
+            if (coll.transform.name == "AIDetection")
+            {
+                player = coll.transform.root.GetComponent<PlayerMovement>();
+                colliderHit = coll.transform;
+            }
+        }
+        if (player)
+        {
+            this.player = player.transform;
+
+            Material[] oldMats = eyeRight.materials;
+            oldMats[0] = eyeDetected;
+
+            eyeRight.materials = oldMats;
+            eyeLeft.materials = oldMats;
+            lastPlayerPosition = colliderHit.position;
+            return true;
+
         }
 
         return false;
