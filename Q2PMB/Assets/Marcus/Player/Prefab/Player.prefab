@@ -366,6 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6306496529325671078}
   - component: {fileID: 327768093723983932}
+  - component: {fileID: 718807785240022990}
   m_Layer: 3
   m_Name: AIDetection
   m_TagString: Untagged
@@ -400,6 +401,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.592184, y: 1.337107, z: 0.6808118}
   m_Center: {x: -0.014785941, y: 0.11624584, z: 0.117692284}
+--- !u!114 &718807785240022990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322100125339714281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28581e7dc985de84d8b36da2156ba345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 1
 --- !u!1 &1401467754141184167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3691,6 +3705,7 @@ GameObject:
   - component: {fileID: 8032886072939341997}
   - component: {fileID: 8032886072939341996}
   - component: {fileID: 8032886072939341987}
+  - component: {fileID: 5868022601119666355}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -3847,6 +3862,23 @@ MonoBehaviour:
   crosshair: {fileID: 6247356606453964764}
   recoil: {fileID: 8673564234000973525}
   Grenade: {fileID: 3357251449441263918, guid: 3a242aaad25ee4f44b18b52cc173fc17, type: 3}
+--- !u!114 &5868022601119666355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032886072939341986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b5d451510ec2446a6169fc7cbd1739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHealth: 100
+  MaxHealth: 100
+  regenRate: 2
+  hitParticle: {fileID: 8670459217519512860, guid: d9bc1d01a3215114cbd2007a7b57677c, type: 3}
+  volume: {fileID: 0}
 --- !u!1 &8114197064292209041
 GameObject:
   m_ObjectHideFlags: 0

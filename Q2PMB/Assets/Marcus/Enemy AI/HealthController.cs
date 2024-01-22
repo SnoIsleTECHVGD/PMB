@@ -12,6 +12,10 @@ public class HealthController : MonoBehaviour
     {
         CurrentHealth = MaxHealth;
     }
+    private void Update()
+    {
+        
+    }
 
     public virtual void OnHit(Vector3 pos)
     {

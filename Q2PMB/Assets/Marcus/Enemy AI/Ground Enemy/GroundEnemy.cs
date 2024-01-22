@@ -35,6 +35,9 @@ public class GroundEnemy : HealthController
     public Vector3 lastPlayerPosition;
     public Transform player;
 
+    public Transform gun;
+    public Transform bullet;
+
     bool hasDetectedPlayer = false;
 
     public MeshRenderer eyeRight;
@@ -48,7 +51,7 @@ public class GroundEnemy : HealthController
         Random.InitState(System.DateTime.Now.Millisecond);
         idleTime = Random.Range(idleTimeMin, idleTimeMax);
     }
-
+    float shotTimer = 2;
     void Update()
     {
         globalTimer += Time.deltaTime;
@@ -130,9 +133,7 @@ public class GroundEnemy : HealthController
                 hasDetectedPlayer = canSeePlayer(20);
                 if (hasDetectedPlayer)
                 {
-                    globalTimer = 0;
-                    currentState = State.Combat;
-                    init = true;
+                  
                 }
                 tracker = 0;
             }
@@ -146,6 +147,15 @@ public class GroundEnemy : HealthController
                 init = false;
             }
 
+            if(globalTimer > shotTimer)
+            {
+                Transform spawnedBullet = Instantiate(bullet);
+                spawnedBullet.position = gun.position;
+                spawnedBullet.GetComponent<Rigidbody>().AddForce((Camera.main.transform.position - gun.position) * 300);
+                Destroy(spawnedBullet.gameObject, 2);
+                globalTimer = 0;
+            }
+
 
             var lookPos = player.position - transform.position;
             lookPos.y = 0;
@@ -154,6 +164,7 @@ public class GroundEnemy : HealthController
 
             if (pathComplete())
             {
+                shotTimer = Random.Range(1.5f, 4.2f);
                 init = true;
             }
 
@@ -324,7 +335,7 @@ public class GroundEnemy : HealthController
                                 Material[] oldMats = eyeRight.materials;
                                 oldMats[0] = eyeDetected;
                                 this.player = enemy.player;
-                                eyeRight.materials = oldMats;
+                                eyeRight.materials = oldMats;       
                                 eyeLeft.materials = oldMats;
                                 lastPlayerPosition = enemy.lastPlayerPosition;
                                 globalTimer = 0;
