@@ -2833,6 +2833,7 @@ MonoBehaviour:
   regenRate: 1
   StayStill: 0
   wanderRadius: 8
+  playerCheckInterval: 15
   walkSpeed: 1.5
   strafeSpeed: 1
   runSpeed: 1
