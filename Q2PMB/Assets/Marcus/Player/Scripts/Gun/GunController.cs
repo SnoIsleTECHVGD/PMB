@@ -55,6 +55,7 @@ public class GunController : MonoBehaviour
                 shootTimer = 0; 
 
                 Transform bullet = Instantiate(gun.gunInfo.bullet.transform);
+                bullet.name = "PlayerBullet";
                 bullet.position = gun.Barrel.position;
                 bullet.forward = Camera.main.transform.forward;
                 bullet.GetComponent<Rigidbody>().AddForce(bullet.forward * 500, ForceMode.Impulse);
@@ -69,6 +70,7 @@ public class GunController : MonoBehaviour
                 shootTimer = 0;
 
                 Transform bullet = Instantiate(gun.gunInfo.bullet.transform);
+                bullet.name = "PlayerBullet";
                 bullet.position = gun.Barrel.position;
                 bullet.forward = Camera.main.transform.forward;
                 bullet.GetComponent<Rigidbody>().AddForce(bullet.forward * 500, ForceMode.Impulse);

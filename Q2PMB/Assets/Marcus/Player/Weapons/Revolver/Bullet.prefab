@@ -127,3 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDamage: 15
   maxDamage: 22
+  defaultHit: {fileID: 6631950445054296654, guid: 0bd27da9d73c33943b65fd5eabb2985d, type: 3}

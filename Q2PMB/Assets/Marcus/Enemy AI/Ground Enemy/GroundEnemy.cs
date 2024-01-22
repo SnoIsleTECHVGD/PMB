@@ -149,6 +149,7 @@ public class GroundEnemy : HealthController
 
             if(globalTimer > shotTimer)
             {
+                anim.CrossFade("Fire", .1f);
                 Transform spawnedBullet = Instantiate(bullet);
                 spawnedBullet.position = gun.position;
                 spawnedBullet.GetComponent<Rigidbody>().AddForce((Camera.main.transform.position - gun.position) * 300);
