@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(2);
+        Time.timeScale = 1;
     }
 
     public void Credits()
