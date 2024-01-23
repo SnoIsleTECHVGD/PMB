@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: 9fafc11f49553d542ab2173c91403198
+guid: 334485ee459bc004faccef7d2fef2d2d
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: 
+      assembly: 
+      name: Maroon
+    second: {fileID: 2100000, guid: fa7717ea7008f344889a1e965d9b99da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkBrown
+    second: {fileID: 2100000, guid: 1e4e2873e7b18a6458fcb62182c1b679, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightBrown
+    second: {fileID: 2100000, guid: 3718f76cc39310b41b60fc464fc0b5cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Maroon
+    second: {fileID: 2100000, guid: fa7717ea7008f344889a1e965d9b99da, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
