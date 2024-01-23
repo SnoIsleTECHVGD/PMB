@@ -261,7 +261,7 @@ MonoBehaviour:
       reflectionCubemapSize: 256
       reflectionCacheCompressed: 0
       reflectionProbeFormat: 74
-      skyReflectionSize: 256
+      skyReflectionSize: 128
       skyLightingOverrideLayerMask:
         serializedVersion: 2
         m_Bits: 0
@@ -366,12 +366,12 @@ MonoBehaviour:
       m_SchemaId:
         m_Id: With3Levels
     lightingQualitySettings:
-      AOStepCount: 040000000600000010000000
+      AOStepCount: 040000000100000010000000
       AOFullRes: 000001
-      AOMaximumRadiusPixels: 200000002800000050000000
+      AOMaximumRadiusPixels: 200000001000000050000000
       AOBilateralUpsample: 000101
       AODirectionCount: 010000000200000004000000
-      ContactShadowSampleCount: 060000000a00000010000000
+      ContactShadowSampleCount: 060000000200000010000000
       SSRMaxRaySteps: 100000002000000040000000
       RTAORayLength:
       - 0.5
