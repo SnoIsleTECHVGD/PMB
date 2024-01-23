@@ -203,7 +203,7 @@ public class GroundEnemy : HealthController
 
     public Vector3 getCombatPosition()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 20; i++)
         {
             if (Vector3.Distance(transform.position, player.position) > 10)
             {
@@ -215,6 +215,8 @@ public class GroundEnemy : HealthController
                     anim.SetBool("Run", true);
                     agent.speed = 2;
                     agent.destination = hit.position;
+
+                    return hit.position;
                 }
             }
             else
@@ -233,6 +235,8 @@ public class GroundEnemy : HealthController
                         agent.speed = 1.2f;
                         agent.destination = hit.position;
                     }
+                    return hit.position;
+
                 }
                 else
                 {
@@ -247,6 +251,8 @@ public class GroundEnemy : HealthController
 
                         agent.destination = hit.position;
                     }
+                    return hit.position;
+
                 }
             }
         }
@@ -255,7 +261,7 @@ public class GroundEnemy : HealthController
     }
     public Vector3 getWanderPosition(float distance)
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 20; i++)
         {
             Vector3 randomPos = transform.position + Random.insideUnitSphere * distance;
 

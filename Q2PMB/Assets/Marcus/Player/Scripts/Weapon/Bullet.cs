@@ -32,6 +32,7 @@ public class Bullet : MonoBehaviour
         {
             Transform hit = Instantiate(defaultHit);
             hit.position = transform.position;
+            hit.localScale = new Vector3(.1f, .1f, .1f);
             Destroy(hit.gameObject, 2.3f);
         }
         Destroy(gameObject);

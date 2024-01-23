@@ -31,7 +31,10 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         HandleEnable();
-        HandleMovement();
+        if(isActive)
+        {
+            HandleMovement();
+        }
     }
 
 
@@ -52,6 +55,7 @@ public class CameraMovement : MonoBehaviour
 
     void HandleMovement()
     {
+
         //Camera movement stuff
         Vector2 b = Vector2.Scale(new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")), Vector2.one * this.sensitivity * this.smoothing);
         this.appliedMouseDelta = Vector2.Lerp(this.appliedMouseDelta, b, 1f / this.smoothing);
