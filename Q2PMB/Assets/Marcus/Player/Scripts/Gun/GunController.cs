@@ -16,6 +16,9 @@ public class GunController : MonoBehaviour
 
     private bool isAiming = false;
     private float shootTimer = 0;
+
+    private float grenadeTimer = 5;
+    public float grenadeCooldown = 5;
     void Start()
     {
 
@@ -25,6 +28,7 @@ public class GunController : MonoBehaviour
     {
         if (inventory.currentWeapon)
         {
+            grenadeTimer += Time.deltaTime;
             shootTimer += Time.deltaTime;
 
             if (inventory.currentWeapon.GetComponent<GunObject>())
@@ -155,8 +159,9 @@ public class GunController : MonoBehaviour
 
     void GrenadeController()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.G) && grenadeTimer > grenadeCooldown)
         {
+            grenadeTimer = 0;
             Grenade gren = Instantiate(Grenade.transform, inventory.weaponHolder).GetComponent<Grenade>();
 
             StartCoroutine(weightWait(.3f, 0));

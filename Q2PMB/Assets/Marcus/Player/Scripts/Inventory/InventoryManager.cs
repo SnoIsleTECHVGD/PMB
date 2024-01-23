@@ -26,9 +26,9 @@ public class InventoryManager : MonoBehaviour
     {
         if (currentWeapon)
         {
-            DropHandler();
+           // DropHandler();
         }
-        PickupHandler();
+        //PickupHandler();
 
     }
 
