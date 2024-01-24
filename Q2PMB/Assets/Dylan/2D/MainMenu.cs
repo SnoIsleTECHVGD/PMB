@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
 
     public Transform highButton;
     public Transform lowButton;
-
+    public Transform difficulty;
     private void Start()
     {
         if(PlayerPrefs.GetString("graphics") == "")
@@ -33,8 +33,9 @@ public class MainMenu : MonoBehaviour
     }
     public void Play()
     {
-        SceneManager.LoadScene(2);
-        Time.timeScale = 1;
+        menu.gameObject.SetActive(false);
+        difficulty.gameObject.SetActive(true);
+
     }
 
     public void Credits()
@@ -90,6 +91,30 @@ public class MainMenu : MonoBehaviour
             highlight.localPosition = lowButton.localPosition;
         }
     }
+
+
+    public void LowDifficulty()
+    {
+        PlayerPrefs.SetString("difficulty", "low");
+        SceneManager.LoadScene(2);
+        Time.timeScale = 1;
+    }
+
+
+    public void MediumDifficulty()
+    {
+        PlayerPrefs.SetString("difficulty", "medium");
+        SceneManager.LoadScene(2);
+        Time.timeScale = 1;
+    }
+
+    public void HighDifficulty()
+    {
+        PlayerPrefs.SetString("difficulty", "high");
+        SceneManager.LoadScene(2);
+        Time.timeScale = 1;
+    }
+
 
 
     public void Quit()

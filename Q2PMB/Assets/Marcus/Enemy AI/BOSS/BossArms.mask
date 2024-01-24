@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BossArms
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/Waist 1
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/ Head
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/ Head/ Head_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/MiddleStart_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/MiddleStart_L/MiddleEnd_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/MiddleStart_L/MiddleEnd_L/MiddleEnd_L_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/PointerStart_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/PointerStart_L/PointerEnd_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/PointerStart_L/PointerEnd_L/PointerEnd_L_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/RingStart_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/RingStart_L/RingEnd_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/RingStart_L/RingEnd_L/RingEnd_L_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/ThumbStart_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/ThumbStart_L/ThumbEnd_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_L/Lower Arm_L/Hand_L/ThumbStart_L/ThumbEnd_L/ThumbEnd_L_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/MiddleStart_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/MiddleStart_R/MiddleEnd_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/MiddleStart_R/MiddleEnd_R/MiddleEnd_R_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/PointerStart_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/PointerStart_R/PointerEnd_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/PointerStart_R/PointerEnd_R/PointerEnd_R_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/RingStart_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/RingStart_R/RingEnd_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/RingStart_R/RingEnd_R/RingEnd_R_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/ThumbStart_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/ThumbStart_R/ThumbEnd_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Torso 1/Chest 1/Neck 1/Upper Arm_R/Lower Arm_R/Hand_R/ThumbStart_R/ThumbEnd_R/ThumbEnd_R_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_L
+    m_Weight: 0
+  - m_Path: Armature/Waist 1/Upper Leg_L/Lower Leg_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_L/Lower Leg_L/Ankle_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_L/Lower Leg_L/Ankle_L/Foot_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_L/Lower Leg_L/Ankle_L/Foot_L/Toe_L
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_L/Lower Leg_L/Ankle_L/Foot_L/Toe_L/Toe_L_end
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_R
+    m_Weight: 0
+  - m_Path: Armature/Waist 1/Upper Leg_R/Lower Leg_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_R/Lower Leg_R/Ankle_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_R/Lower Leg_R/Ankle_R/Foot_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_R/Lower Leg_R/Ankle_R/Foot_R/Toe_R
+    m_Weight: 1
+  - m_Path: Armature/Waist 1/Upper Leg_R/Lower Leg_R/Ankle_R/Foot_R/Toe_R/Toe_R_end
+    m_Weight: 1
+  - m_Path: Bandanna
+    m_Weight: 1
+  - m_Path: Chest
+    m_Weight: 1
+  - m_Path: Eyes and Ears
+    m_Weight: 1
+  - m_Path: Feet
+    m_Weight: 1
+  - m_Path: Hands
+    m_Weight: 1
+  - m_Path: Hat
+    m_Weight: 1
+  - m_Path: Head
+    m_Weight: 1
+  - m_Path: Jacket
+    m_Weight: 1
+  - m_Path: Joints
+    m_Weight: 1
+  - m_Path: Legs
+    m_Weight: 1
+  - m_Path: Lower Arms
+    m_Weight: 1
+  - m_Path: Neck
+    m_Weight: 1
+  - m_Path: Torso
+    m_Weight: 1
+  - m_Path: Upper arms
+    m_Weight: 1
+  - m_Path: Waist
+    m_Weight: 1
+  - m_Path: Waist.001
+    m_Weight: 1
+  - m_Path: Waist.002
+    m_Weight: 1

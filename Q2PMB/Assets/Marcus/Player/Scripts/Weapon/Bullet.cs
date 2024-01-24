@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,13 +28,16 @@ public class Bullet : MonoBehaviour
             }
             
         }
-        else
+        else if(!collision.transform.root.GetComponent<Bullet>())
         {
             Transform hit = Instantiate(defaultHit);
             hit.position = transform.position;
             hit.localScale = new Vector3(.1f, .1f, .1f);
             Destroy(hit.gameObject, 2.3f);
+            Destroy(gameObject);
+
         }
-        Destroy(gameObject);
+
+
     }
 }

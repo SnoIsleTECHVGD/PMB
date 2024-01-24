@@ -2837,7 +2837,7 @@ MonoBehaviour:
   currentState: 0
   hitParticle: {fileID: 8670459217519512860, guid: d9bc1d01a3215114cbd2007a7b57677c, type: 3}
   head: {fileID: 5935750854919628328}
-  ragdoll: {fileID: 6982429009277390312, guid: 3d1d16ae0d0a0164c8d22dce3ffc7422, type: 3}
+  ragdoll: {fileID: 6982429009277390312, guid: cc6c6ccf3b314b9468e4052141c04f86, type: 3}
   lastPlayerPosition: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   muzzleFlash: {fileID: 3696350352318161031, guid: ecf561372febf2c4db086ade434d008b, type: 3}
@@ -2848,7 +2848,7 @@ MonoBehaviour:
     m_Bits: 64
   eyeRight: {fileID: 2914751168368443619}
   eyeLeft: {fileID: 5590502820898595202}
-  eyeDetected: {fileID: 2100000, guid: f1bd63230080a344189ce0d9c60b0cc6, type: 2}
+  eyeDetected: {fileID: 2100000, guid: 857a208860b3daf48ba6a91e09cf8dfa, type: 2}
 --- !u!1 &5148879221908402445
 GameObject:
   m_ObjectHideFlags: 0

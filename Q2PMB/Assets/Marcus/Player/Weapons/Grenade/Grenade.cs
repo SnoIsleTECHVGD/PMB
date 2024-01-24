@@ -65,6 +65,13 @@ public class Grenade : MonoBehaviour
             if(coll.GetComponent<Hitbox>())
             {
                 coll.GetComponent<Hitbox>().Damage(125 / Vector3.Distance(transform.position, coll.transform.position), 125 / Vector3.Distance(transform.position, coll.transform.position), coll.transform.position);
+
+                if(coll.transform.root.GetComponent<Player>())
+                {
+                    Camera.main.GetComponent<CamShake>().trauma = .2f;
+
+                    Camera.main.GetComponent<CamShake>().Shake(1);
+                }
             }
         }
         Destroy(Instantiate(explosion, transform.position, Quaternion.identity).gameObject, particleLifetime);

@@ -42,12 +42,53 @@ public class SniperEnemy : HealthController
     public MeshRenderer eyeRight;
     public MeshRenderer eyeLeft;
     public Material eyeDetected;
+
+
+    private float bulletMinDamage;
+    private float bulletMaxDamage;
+    private float bulletSpeed;
+
     void Start()
     {
         playerCheckInterval = Random.Range(15, 45);
         anim = GetComponent<Animator>();
         Random.InitState(System.DateTime.Now.Millisecond);
         idleTime = Random.Range(idleTimeMin, idleTimeMax);
+
+        setDifficulity();
+    }
+
+    public void setDifficulity()
+    {
+        string difficulty = PlayerPrefs.GetString("difficulty");
+
+        if (difficulty == "low")
+        {
+            CurrentHealth = 40;
+            MaxHealth = 40;
+            bulletMinDamage = 10;
+            bulletMaxDamage = 16;
+            bulletSpeed = 225;
+        }
+        if (difficulty == "medium")
+        {
+            CurrentHealth = 50;
+            MaxHealth = 50;
+
+            bulletMinDamage = 16;
+            bulletMaxDamage = 25;
+            bulletSpeed = 300;
+        }
+        if (difficulty == "high")
+        {
+            CurrentHealth = 70;
+            MaxHealth = 70;
+
+            bulletMinDamage = 22;
+            bulletMaxDamage = 32;
+            bulletSpeed = 380;
+        }
+
     }
     float shotTimer = 2;
     void Update()
@@ -100,11 +141,13 @@ public class SniperEnemy : HealthController
             {
                 anim.Play("Shot");
                 Transform spawnedBullet = Instantiate(bullet);
+                spawnedBullet.GetComponent<Bullet>().maxDamage = bulletMaxDamage;
+                spawnedBullet.GetComponent<Bullet>().minDamage = bulletMinDamage;
                 Transform muzzleflash = Instantiate(muzzleFlash, gun);
                 Destroy(muzzleflash.gameObject, .1f);
 
                 spawnedBullet.position = gun.position;
-                spawnedBullet.GetComponent<Rigidbody>().AddForce((Camera.main.transform.position - gun.position) * 300);
+                spawnedBullet.GetComponent<Rigidbody>().AddForce((Camera.main.transform.position - gun.position) * bulletSpeed);
                 Destroy(spawnedBullet.gameObject, 2);
                 globalTimer = 0;
 
@@ -191,7 +234,6 @@ public class SniperEnemy : HealthController
             RaycastHit hit;
             if (Physics.Raycast(head.position, colliderHit.position - head.position, out hit, range, ~ignore))
             {
-                print(hit.transform.name);
                 if (hit.transform.name == "AIDetection")
                 {
                     float angle = Vector3.Angle(colliderHit.position - transform.position, transform.forward);

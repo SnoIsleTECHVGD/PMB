@@ -19,8 +19,14 @@ public class GunController : MonoBehaviour
 
     private float grenadeTimer = 5;
     public float grenadeCooldown = 5;
+
+    public int grenadeCount = 0;
+    public bool isReloading = false;
+    int currentAmmoCount = 6;
     void Start()
     {
+      
+
 
     }
 
@@ -35,8 +41,18 @@ public class GunController : MonoBehaviour
             {
                 GunObject gun = inventory.currentWeapon.GetComponent<GunObject>();
                 CollisionDetection(gun);
-                HandleFiring(gun);
-                HandleAnimation(gun);
+                if(!isReloading)
+                {
+                    HandleFiring(gun);
+                    HandleAnimation(gun);
+                }
+           
+
+
+                if(!isReloading && Input.GetKeyDown(KeyCode.R))
+                {
+                    StartCoroutine(reload());
+                }
             }
 
             GrenadeController();
@@ -51,10 +67,17 @@ public class GunController : MonoBehaviour
 
     private void HandleFiring(GunObject gun)
     {
+
+        if(Input.GetMouseButtonDown(0) && currentAmmoCount == 0)
+        {
+            StartCoroutine(reload());
+            return;
+        }
         if (gun.gunInfo.isAutomatic)
         {
             if (Input.GetMouseButton(0) && shootTimer > gun.gunInfo.fireRate)
             {
+                currentAmmoCount--;
                 shootRecoil(gun);
                 shootTimer = 0; 
 
@@ -70,6 +93,8 @@ public class GunController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && shootTimer > gun.gunInfo.fireRate)
             {
+                currentAmmoCount--;
+
                 shootRecoil(gun);
                 shootTimer = 0;
 
@@ -156,11 +181,27 @@ public class GunController : MonoBehaviour
         }
     }
 
+    IEnumerator reload()
+    {
+        inventory.currentWeapon.anim.enabled = false;
+        inventory.currentWeapon.anim.enabled = true;
+        inventory.currentWeapon.anim.Rebind();
+        inventory.currentWeapon. anim.Update(0f);
+
+        inventory.currentWeapon.anim.CrossFade("Reload", .1f);
+
+        isReloading = true;
+
+        yield return new WaitForSeconds(1.1f);
+        currentAmmoCount = 6;
+        isReloading = false;
+    }
 
     void GrenadeController()
     {
-        if (Input.GetKeyDown(KeyCode.G) && grenadeTimer > grenadeCooldown)
+        if (Input.GetKeyDown(KeyCode.G) && grenadeTimer > grenadeCooldown && grenadeCount != 0)
         {
+            grenadeCount--;
             grenadeTimer = 0;
             Grenade gren = Instantiate(Grenade.transform, inventory.weaponHolder).GetComponent<Grenade>();
 
@@ -206,5 +247,21 @@ public class GunController : MonoBehaviour
         inventory.rig.Build();
 
         StartCoroutine(weightWait(.5f, 1));
+    }
+
+    public GameObject pickupText;
+
+    public void pickupGrenade()
+    {
+        StartCoroutine(pickupGrenadeNoti());
+    }
+    public IEnumerator pickupGrenadeNoti()
+    {
+        pickupText.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        pickupText.SetActive(false);
+
     }
 }
