@@ -46,6 +46,7 @@ public class Boss : HealthController
     private float specialBulletMinDamage;
     private float specialBulletMaxDamage;
     private float specialBulletSpeed;
+    float rotationSpeed;
 
     void Start()
     {
@@ -61,6 +62,8 @@ public class Boss : HealthController
 
         if (difficulty == "low")
         {
+            shotTimer = .8f;
+            rotationSpeed = 4;
             CurrentHealth = 500;
             MaxHealth = 500;
 
@@ -74,6 +77,9 @@ public class Boss : HealthController
         }
         if (difficulty == "medium")
         {
+            shotTimer = .5f;
+
+            rotationSpeed = 7;
             CurrentHealth = 850;
             MaxHealth = 850;
 
@@ -87,7 +93,9 @@ public class Boss : HealthController
         }
         if (difficulty == "high")
         {
+            shotTimer = .3f;
 
+            rotationSpeed = 12;
             CurrentHealth = 1250;
             MaxHealth = 1250;
 
@@ -111,6 +119,7 @@ public class Boss : HealthController
             rag.position = transform.position;
             rag.rotation = transform.rotation;
             Destroy(rag.gameObject, 30);
+            player.GetComponent<Player>().WinScreen();
             Destroy(gameObject);
         }
     }
@@ -151,7 +160,7 @@ public class Boss : HealthController
             var lookPos = player.position - transform.position;
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 5);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
 
             if (!isPerformingSpecialAttack)
             {
@@ -225,7 +234,7 @@ public class Boss : HealthController
 
                         spawnedBullet.position = rGun.position;
                         spawnedBullet.GetComponent<Rigidbody>().AddForce((Camera.main.transform.position - rGun.position) * bulletSpeed);
-                        Destroy(spawnedBullet.gameObject, 2);
+                        Destroy(spawnedBullet.gameObject, 6);
 
                         anim.CrossFade("FireRight", .03f);
                     }
@@ -239,7 +248,7 @@ public class Boss : HealthController
 
                         spawnedBullet.position = lGun.position;
                         spawnedBullet.GetComponent<Rigidbody>().AddForce((Camera.main.transform.position - lGun.position) * bulletSpeed);
-                        Destroy(spawnedBullet.gameObject, 2);
+                        Destroy(spawnedBullet.gameObject, 6);
 
                         anim.CrossFade("FireLeft", .03f);
 
@@ -255,9 +264,6 @@ public class Boss : HealthController
     IEnumerator specialAttack()
     {
         yield return new WaitForSeconds(.374f);
-
-
-
         Transform spawnedBullet = Instantiate(bullet);
         spawnedBullet.GetComponent<Bullet>().maxDamage = specialBulletMaxDamage;
         spawnedBullet.GetComponent<Bullet>().minDamage = specialBulletMinDamage;
@@ -268,11 +274,9 @@ public class Boss : HealthController
 
         spawnedBullet.position = rGun.position + transform.forward;
         spawnedBullet.GetComponent<Rigidbody>().AddForce((Camera.main.transform.position - rGun.position) * specialBulletSpeed);
-        Destroy(spawnedBullet.gameObject, 2);
-
+        Destroy(spawnedBullet.gameObject, 10);
 
         yield return new WaitForSeconds(.474f);
-
         isPerformingSpecialAttack = false;
         agent.isStopped = false;
 
@@ -284,7 +288,6 @@ public class Boss : HealthController
         PlayerMovement player = null;
         Transform colliderHit = null;
 
-
         foreach (Collider coll in localTransforms)
         {
             if (coll.transform.name == "AIDetection")
@@ -293,9 +296,6 @@ public class Boss : HealthController
                 colliderHit = coll.transform;
             }
         }
-
-
-
         if (player)
         {
             RaycastHit hit;

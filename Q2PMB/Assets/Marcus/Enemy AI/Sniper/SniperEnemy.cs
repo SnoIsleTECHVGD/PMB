@@ -64,6 +64,7 @@ public class SniperEnemy : HealthController
 
         if (difficulty == "low")
         {
+            shotTimer = 6;
             CurrentHealth = 40;
             MaxHealth = 40;
             bulletMinDamage = 10;
@@ -72,6 +73,8 @@ public class SniperEnemy : HealthController
         }
         if (difficulty == "medium")
         {
+            shotTimer = 4;
+
             CurrentHealth = 50;
             MaxHealth = 50;
 
@@ -81,6 +84,8 @@ public class SniperEnemy : HealthController
         }
         if (difficulty == "high")
         {
+            shotTimer = 2;
+
             CurrentHealth = 70;
             MaxHealth = 70;
 
@@ -116,15 +121,10 @@ public class SniperEnemy : HealthController
                 tracker = 0;
             }
 
+
          
-            if (globalTimer > idleTime && !StayStill)
-            {
-                globalTimer = 0;
-                currentState = State.Wander;
-                init = true;
-            }
         }
-    
+
         if (currentState == State.Combat)
         {
             if (tracker == playerCheckInterval)
@@ -151,7 +151,6 @@ public class SniperEnemy : HealthController
                 Destroy(spawnedBullet.gameObject, 2);
                 globalTimer = 0;
 
-                shotTimer = Random.Range(4, 15);
             }
 
 
@@ -160,7 +159,7 @@ public class SniperEnemy : HealthController
             var rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 4.5f);
 
-        
+
 
         }
     }
@@ -194,7 +193,7 @@ public class SniperEnemy : HealthController
         Destroy(particle.gameObject, 2);
     }
 
-  
+
     public enum Difficulty
     {
         Easy, Normal, Hard
@@ -227,7 +226,7 @@ public class SniperEnemy : HealthController
             }
         }
 
-       
+
 
         if (player)
         {

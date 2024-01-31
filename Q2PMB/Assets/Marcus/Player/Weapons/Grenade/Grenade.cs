@@ -52,6 +52,7 @@ public class Grenade : MonoBehaviour
             return;
 
         Collider[] nearbyObjects = Physics.OverlapSphere(transform.position, explosionRadius);
+        Collider[] nearbyObjects2 = Physics.OverlapSphere(transform.position, explosionRadius * 2.5f);
 
         foreach (Collider coll in nearbyObjects)
         {
@@ -66,14 +67,26 @@ public class Grenade : MonoBehaviour
             {
                 coll.GetComponent<Hitbox>().Damage(125 / Vector3.Distance(transform.position, coll.transform.position), 125 / Vector3.Distance(transform.position, coll.transform.position), coll.transform.position);
 
-                if(coll.transform.root.GetComponent<Player>())
+                
+            }
+        }
+
+        foreach (Collider coll in nearbyObjects2)
+        {
+            
+            if (coll.GetComponent<Hitbox>())
+            {
+                if (coll.transform.root.GetComponent<Player>())
                 {
-                    Camera.main.GetComponent<CamShake>().trauma = .2f;
+                    Camera.main.GetComponent<CamShake>().trauma = .25f;
 
                     Camera.main.GetComponent<CamShake>().Shake(1);
                 }
+
             }
         }
+
+       
         Destroy(Instantiate(explosion, transform.position, Quaternion.identity).gameObject, particleLifetime);
 
         Destroy(this.gameObject, .1f);

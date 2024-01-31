@@ -14,6 +14,8 @@ public class MainMenu : MonoBehaviour
     public Transform difficulty;
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if(PlayerPrefs.GetString("graphics") == "")
         {
             PlayerPrefs.SetString("graphics", "High");

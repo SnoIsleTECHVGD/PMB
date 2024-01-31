@@ -49,6 +49,7 @@ public class GroundEnemy : HealthController
     private float bulletMaxDamage;
     private float bulletSpeed;
 
+    float rotationSpeed;
     void Start()
     {
         playerCheckInterval = Random.Range(15, 45);
@@ -64,8 +65,10 @@ public class GroundEnemy : HealthController
     {
         string difficulty = PlayerPrefs.GetString("difficulty");
 
-        if(difficulty == "low")
+        if (difficulty == "low")
         {
+            shotTimer = 2;
+            rotationSpeed = 3;
             CurrentHealth = 40;
             MaxHealth = 40;
             bulletMinDamage = 10;
@@ -74,6 +77,8 @@ public class GroundEnemy : HealthController
         }
         if (difficulty == "medium")
         {
+            shotTimer = 1;
+            rotationSpeed = 4.5f;
             CurrentHealth = 50;
             MaxHealth = 50;
             bulletMinDamage = 16;
@@ -82,6 +87,8 @@ public class GroundEnemy : HealthController
         }
         if (difficulty == "high")
         {
+            shotTimer = .5f;
+            rotationSpeed = 7;
             CurrentHealth = 70;
             MaxHealth = 70;
             bulletMinDamage = 22;
@@ -103,7 +110,7 @@ public class GroundEnemy : HealthController
         tracker++;
         if (currentState == State.Idle)
         {
-            if(tracker == playerCheckInterval)
+            if (tracker == playerCheckInterval)
             {
                 hasDetectedPlayer = canSeePlayer(15);
                 if (hasDetectedPlayer)
@@ -115,7 +122,7 @@ public class GroundEnemy : HealthController
                 }
                 tracker = 0;
             }
-         
+
             if (init)
             {
                 agent.isStopped = true;
@@ -172,7 +179,7 @@ public class GroundEnemy : HealthController
                 hasDetectedPlayer = canSeePlayer(20);
                 if (hasDetectedPlayer)
                 {
-                  
+
                 }
                 tracker = 0;
             }
@@ -186,7 +193,7 @@ public class GroundEnemy : HealthController
                 init = false;
             }
 
-            if(globalTimer > shotTimer)
+            if (globalTimer > shotTimer)
             {
                 anim.CrossFade("Fire", .1f);
                 Transform spawnedBullet = Instantiate(bullet);
@@ -202,11 +209,10 @@ public class GroundEnemy : HealthController
             var lookPos = player.position - transform.position;
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 4.5f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
 
             if (pathComplete())
             {
-                shotTimer = Random.Range(1.5f, 4.2f);
                 init = true;
             }
 
@@ -249,7 +255,7 @@ public class GroundEnemy : HealthController
             if (Vector3.Distance(transform.position, player.position) > 10)
             {
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(transform.position + transform.forward * Random.Range(5,15), out hit, 99999, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(transform.position + transform.forward * Random.Range(5, 15), out hit, 99999, NavMesh.AllAreas))
                 {
                     anim.SetBool("StrafeR", false);
                     anim.SetBool("StrafeL", false);
@@ -356,12 +362,12 @@ public class GroundEnemy : HealthController
                 colliderHit = coll.transform;
             }
 
-            if(coll.transform.root.GetComponent<GroundEnemy>())
+            if (coll.transform.root.GetComponent<GroundEnemy>())
             {
                 localCompananions.Add(coll.transform.root.GetComponent<GroundEnemy>());
             }
         }
-       
+
         if (!hasDetectedPlayer)
         {
 
@@ -383,7 +389,7 @@ public class GroundEnemy : HealthController
                                 Material[] oldMats = eyeRight.materials;
                                 oldMats[0] = eyeDetected;
                                 this.player = enemy.player;
-                                eyeRight.materials = oldMats;       
+                                eyeRight.materials = oldMats;
                                 eyeLeft.materials = oldMats;
                                 lastPlayerPosition = enemy.lastPlayerPosition;
                                 globalTimer = 0;

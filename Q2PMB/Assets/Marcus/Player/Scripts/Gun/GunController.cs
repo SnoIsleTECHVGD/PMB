@@ -185,8 +185,15 @@ public class GunController : MonoBehaviour
     {
         inventory.currentWeapon.anim.enabled = false;
         inventory.currentWeapon.anim.enabled = true;
+
+        inventory.currentWeapon.anim.Update(0f);
+        inventory.currentWeapon.anim.Update(0f);
+        inventory.currentWeapon.anim.Update(0f);
         inventory.currentWeapon.anim.Rebind();
-        inventory.currentWeapon. anim.Update(0f);
+        inventory.currentWeapon.anim.enabled = false;
+
+        yield return new WaitForEndOfFrame();
+        inventory.currentWeapon.anim.enabled = true;
 
         inventory.currentWeapon.anim.CrossFade("Reload", .1f);
 

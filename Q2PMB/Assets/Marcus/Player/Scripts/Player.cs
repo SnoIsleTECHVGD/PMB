@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.SceneManagement;
 
 public class Player : HealthController
 {
@@ -13,6 +14,9 @@ public class Player : HealthController
     private float previousHealth;
     private float bloodDuration = 0;
     private float timer = 0;
+
+    public Transform Death;
+    public Transform Win;
 
     void Start()
     {
@@ -29,8 +33,13 @@ public class Player : HealthController
         {
 
             if (CurrentHealth <= 0)
-            {             
-                Time.timeScale = 0;
+            {
+                DeathScreen();
+
+                GetComponent<PlayerMovement>().enabled = false;
+                GetComponent<GunController>().enabled = false;
+                GetComponent<GunController>().cameraHolder.GetComponent<CameraMovement>().enabled = false;
+                GetComponent<GunController>().cameraHolder.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetComponent<Sway>().enabled = false;
             }
             timer = 0;
 
@@ -83,6 +92,32 @@ public class Player : HealthController
 
     }
 
+
+    public void DeathScreen()
+    {
+        StartCoroutine(died());
+    }
+
+    IEnumerator died()
+    {
+        Death.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(0);
+
+    }
+
+    public void WinScreen()
+    {
+        StartCoroutine(win());
+    }
+
+    IEnumerator win()
+    {
+        Win.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(0);
+
+    }
 
     public override void OnHit(Vector3 pos)
     {

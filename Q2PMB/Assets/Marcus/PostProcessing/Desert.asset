@@ -138,7 +138,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 3
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -149,15 +149,15 @@ MonoBehaviour:
     max: 0.5
   m_RaySteps:
     m_OverrideState: 1
-    m_Value: 32
+    m_Value: 128
     min: 16
     max: 128
   m_FullResolutionSS:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   m_FilterRadius:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 8
     min: 2
     max: 8
   rayTracing:
@@ -187,12 +187,12 @@ MonoBehaviour:
     min: 0.01
   m_ClampValue:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 1.5
     min: 0.001
     max: 10
   m_FullResolution:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   m_UpscaleRadius:
     m_OverrideState: 1
     m_Value: 4
@@ -203,10 +203,10 @@ MonoBehaviour:
     m_Value: 1
   m_HalfResolutionDenoiser:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   m_DenoiserRadius:
     m_OverrideState: 1
-    m_Value: 0.75
+    m_Value: 0.25
     min: 0.001
     max: 1
   m_SecondDenoiserPass:
